@@ -10,6 +10,12 @@ Demo application that performs AWS DynamoDB operations (PutItem, GetItem, Scan) 
    npm install
    ```
 
+   If you plan to run via Docker/Make, you can skip `npm install` and build the container instead:
+
+   ```bash
+   make build
+   ```
+
 2. **AWS credentials** (for real AWS or LocalStack):  
    Configure as usual (e.g. `aws configure`, env vars `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY`, or IAM role).
 
@@ -19,7 +25,7 @@ Demo application that performs AWS DynamoDB operations (PutItem, GetItem, Scan) 
    - **LocalStack**: Run DynamoDB locally and create the table.  
    - **DynamoDB Local**: Use the [NoSQL Workbench](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.html) or DynamoDB Local Docker image.
 
-   Example AWS CLI (after credentials are set) or use the script:
+  You can create the table with `make setup-dynamodb`, or use the AWS CLI (after credentials are set):
 
    ```bash
    aws dynamodb create-table \
@@ -104,3 +110,11 @@ When using Docker Compose, telemetry is sent to Grafana Alloy first and then for
 
 - **Grafana Cloud**: Set `GRAFANA_OTLP_ENDPOINT`, `GRAFANA_OTLP_USERNAME`, and `GRAFANA_OTLP_API_KEY` in `.env` for Alloy to forward to Grafana Cloud.
 - **Local OTLP collector**: Point `OTEL_EXPORTER_OTLP_ENDPOINT`/`_LOGS_ENDPOINT`/`_METRICS_ENDPOINT` at your collector instead of Alloy if desired.
+
+## Documentation
+
+- **OpenTelemetry JS**: https://opentelemetry.io/docs/languages/js/
+- **OTLP exporter configuration**: https://opentelemetry.io/docs/concepts/sdk-configuration/otlp-exporter-configuration/
+- **Grafana Alloy**: https://grafana.com/docs/alloy/latest/
+- **Grafana Cloud OTLP ingest**: https://grafana.com/docs/grafana-cloud/send-data/otlp/
+- **Grafana Cloud OTLP (production)**: https://grafana.com/docs/grafana-cloud/send-data/otlp/send-data-otlp/ (recommends Grafana Alloy for production environments)
