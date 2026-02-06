@@ -53,6 +53,7 @@ Via Docker + Make:
 
 ```bash
 cp .env.example .env
+${EDITOR:-vi} .env
 make build
 make start
 ```
