@@ -15,7 +15,7 @@ start: $(BUILD_STAMP)
 down:
 	docker compose down
 
-clean: down
+clean: down cleanup-dynamodb
 	docker compose rm -f -v
 	docker rmi -f otel-dynamodb-demo 2>/dev/null || true
 	rm -f $(BUILD_STAMP)
@@ -24,7 +24,11 @@ setup-dynamodb:
 	./setup-dynamodb.sh
 
 cleanup-dynamodb:
-	./cleanup-dynamodb.sh
+	@if [ -n "$$AWS_ACCESS_KEY_ID" ] || [ -n "$$AWS_PROFILE" ]; then \
+		./cleanup-dynamodb.sh; \
+	else \
+		echo "Skipping cleanup-dynamodb (no AWS credentials detected)."; \
+	fi
 
 help:
 	@printf "%s\n" \
@@ -34,7 +38,7 @@ help:
 		"  build  Build the container image (if needed)" \
 		"  start  Start the demo with docker compose" \
 		"  down   Stop the compose services" \
-		"  clean  Stop services, remove containers/images, and stamp" \
+		"  clean  Stop services, remove containers/images, and table" \
 		"  setup-dynamodb  Create the DynamoDB table via AWS CLI" \
 		"  cleanup-dynamodb  Delete the DynamoDB table via AWS CLI" \
 		"  help   Show this help"
