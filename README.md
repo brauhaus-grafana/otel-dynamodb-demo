@@ -1,6 +1,12 @@
 # OpenTelemetry + DynamoDB Demo
 
-Demo application that performs AWS DynamoDB operations (PutItem, GetItem, Scan) with **OpenTelemetry** instrumentation. All DynamoDB calls are traced and can be exported to Grafana Tempo or any OTLP backend.
+This is a very simple, very likely to not be "best practices" Demo application that performs AWS DynamoDB operations (PutItem, GetItem, Scan) with **OpenTelemetry** instrumentation. All DynamoDB calls are traced and can be exported to Grafana Tempo or any OTLP backend. This demo is funcitonal, but very much should not be considered a model example. See https://docs.aws.amazon.com/xray/latest/devguide/xray-services-adot.html for beter ways to do things. 
+
+
+This demo was written largely by using prompts to Cursor, an AI-powered Integrated Development Environment (IDE) designed for software development, built as a specialized fork of VS Code See: https://cursor.com/
+
+
+
 
 ## Setup
 
